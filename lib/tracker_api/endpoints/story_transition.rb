@@ -7,10 +7,14 @@ module TrackerApi
         @client = client
       end
 
-      def get(project_id, id, params={})
-        data = client.get("/projects/#{project_id}/story_transitions/#{id}", params: params).body
+      def get(project_id, params={})
+        data = client.get("/projects/#{project_id}/story_transitions", params: params).body
 
-        Resources::StoryTransition.new({ client: client, project_id: project_id }.merge(data))
+        puts data.first
+
+        data.map do |transition|
+          Resources::StoryTransition.new({ client: client, project_id: project_id }.merge(transition))
+        end
       end
 
     end
