@@ -118,6 +118,10 @@ module TrackerApi
         Endpoints::Stories.new(client).get(id, params)
       end
 
+      def story_transitions(params={})
+        Endpoints::StoryTransitions.new(client).get(id, params)
+      end
+
       # Provides a list of all the memberships in the project.
       #
       # @param [Hash] params
